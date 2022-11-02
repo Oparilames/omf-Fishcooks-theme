@@ -1,6 +1,6 @@
 <img src="https://cdn.rawgit.com/oh-my-fish/oh-my-fish/e4f1c2e0219a17e2c748b824004c8d0b38055c16/docs/logo.svg" align="left" width="144px" height="144px"/>
 
-#### Fish cooks theme 
+#### Fish cook's theme 
 > A Powerline-style, Git-aware theme for [Oh My Fish][omf-link] based on [FishFace](https://github.com/oh-my-fish/theme-fishface) and [es](https://github.com/oh-my-fish/theme-es) theme.
 Broken up to two lines: information about duration of last command, shortened current location and git status on line one and line two consisting of user input all finished with a fish worthy pleasing appearance. 
 
