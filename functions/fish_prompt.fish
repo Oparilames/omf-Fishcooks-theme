@@ -1,5 +1,11 @@
 # Powerline-patched fonts are required
 
+# Sören adjusments
+  set oparilames_omfEsPrefix1stLine "╭─ "
+#  set oparilames_omfEsPrefix2stLine "╰── ><(((\"> ──"
+  set oparilames_omfEsPrefix2stLine "╰── ><(((”> ──"
+  set oparilames_promt ""
+
 # Global variables that affect how left and right prompts look like
 set -g symbols_style                   'symbols'
 set -g theme_display_git_ahead_verbose  yes
@@ -10,22 +16,26 @@ function fish_prompt
   set -g last_status $status                                         #exit status of last command
   #set -l count (_file_count)
   _icons_initialize
-  set -l p_path2 (_col brblue o u)(prompt_pwd2)(_col_res)            #path shortened to last two folders ($count)
+  set -l p_path2 (_col brblue o i)(prompt_pwd2)(_col_res)            #path shortened to last two folders ($count)
   set -l symbols ''                                                  #add some pre-path symbols
   if [ $symbols_style = 'symbols' ]
     if [ ! -w . ];    set symbols $symbols(_col ff6600);           end
+    if [ -w . ];    set symbols $symbols(_col ffffff)📂; end        # Oparilames: Let's ad a folder icon? Even if this is superfluous.
     if set -q -x VIM; set symbols $symbols(_col 3300ff o)$ICON_VIM; end
   end
   if [ (_is_git_dirty) ]; set dirty ''; else; set dirty ' '; end     #add space only in clean git branches
   if test $last_status = 0                                           #prompt symbol green normal, red on error
-    set prompt (_col green b)"$dirty"(_UserSymbol)(_col_res)' '
+    set prompt (_col green b)"$dirty"(_col_res)' '
+    set oparilames_promt (_col green b)(_UserSymbol)(_col_res)
   else
-    set prompt (_col brred b)"$dirty"(_UserSymbol)(_col_res)' '
+    set prompt (_col brred b)"$dirty"(_col_res)' '
+    set oparilames_promt (_col green b)(_UserSymbol)(_col_res)
   end
-
-  echo -n -s $symbols$p_path2                                        #-n no newline, -s no space separation of arguments
+  echo "" # Oparilames: empty line between commands
+  echo -n -s $oparilames_omfEsPrefix1stLine$symbols' '$p_path2       #-n no newline, -s no space separation of arguments
   _is_git_folder; and _prompt_git
   echo -n -s $prompt
+  echo -e "\n$oparilames_omfEsPrefix2stLine$oparilames_promt "
 end
 
 function fish_right_prompt
@@ -91,12 +101,13 @@ function _cmd_duration -d 'Displays the elapsed time of last command and show no
   end
 end
 
+# Oparilames: Due to a faible for typography let's replace the underlined text by the only remaining option: italics. Unfortunately smallcaps are not available
 function _col                                     #Set Color 'name b u' bold, underline
-  set -l col; set -l bold; set -l under
+  set -l col; set -l bold; set -l under; set -l smallcaps
   if [ -n "$argv[1]" ];       set col   $argv[1]; end
   if [ (count $argv) -gt 1 ]; set bold  "-"(string replace b o $argv[2] 2>/dev/null); end
-  if [ (count $argv) -gt 2 ]; set under "-"$argv[3]; end
-  set_color $bold $under $argv[1]
+  if [ (count $argv) -gt 2 ]; set italic "-"$argv[3]; end
+set_color $bold $italic $argv[1]
 end
 function _col_res -d "Rest background and foreground colors"
   set_color -b normal
@@ -107,7 +118,7 @@ function prompt_pwd2
   set realhome ~
   set -l _tmp (string replace -r '^'"$realhome"'($|/)' '~$1' $PWD)  #replace $HOME with '~' in path
   set -l _tmp2 (basename (dirname $_tmp))/(basename $_tmp)          #get last two dirs from path
-  echo (string trim -l -c=/ (string replace "./~" "~" $_tmp2))      #trim left '/' or './' for special cases
+  echo ' ['(string trim -l -c=/ (string replace "./~" "~" $_tmp2))']'      #trim left '/' or './' for special cases
 end
 function prompt_pwd_full
   set -q fish_prompt_pwd_dir_length; or set -l fish_prompt_pwd_dir_length 1
@@ -148,9 +159,9 @@ function get_hostname -d "Set current hostname to prompt variable $HOSTNAME_PROM
   end
 end
 
-function _UserSymbol                                                #prompt symbol: '#' superuser or '>' user
+function _UserSymbol                                                #prompt symbol: '>' superuser or '»' user
   if test (id -u $USER) -eq 0
-    echo "#"
+    echo "»"
   else
     echo ">"
   end
