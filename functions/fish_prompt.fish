@@ -1,5 +1,30 @@
 # Powerline-patched fonts are required
-
+# Emoji 1.0 in 2015
+set -g emojiOpenFolder "📂" #  Unicode 6.0 in 2010
+set -g emojiHome "🏠" # Unicode 6.0 in 2010
+set -g emojiStar "⭐" # Unicode 5.1 in 2008
+set -g emojiHighVoltage "⚡" # Unicode 4.0 in 2003
+set -g emojiFire "🔥" # Unicode 6.0 in 2010
+set -g emojiGraduatedHad "🎓" # Unicode 6.0 in 2010
+set -g emojiMagnifyingGlass "🔎" # Unicode 6.0 in 2010
+set -g emojiOpenBook "📖" # Unicode 6.0 in 2010
+set -g emojiPageFacingUp "📄" # Unicode 6.0 in 2010
+set -g emojiLabel "🏷️" # Unicode 7.0 in 2014
+set -g emojiPackage "📦" # Unicode 6.0 in 2010
+set -g emojiPencil "✏️" # Unicode 1.1 in 1993
+set -g emojiMemo "📝" # Unicode 6 in 2010
+set -g emojiPushpin "📌" # Unicode 6.0 in 2010
+set -g emojiLocked "🔒" # Unicode 6.0 in 2010
+set -g emojiUnlocked "🔓" # Unicode 6.0 in 2010
+set -g emojiWarning "⚠️" # Unicode 4.0 in 2003
+set -g emojiProhibited "🚫" # Unicode 6.0 in 2010
+set -g emojiWhiteExclamationmark "❕" # Unicode 6.0 in 2010
+set -g emojiRedExclamationmark "❗" # Unicode 5.2 in 2009
+set -g emojiWhiteQuestionmark "❔" # Unicode 6.0 in 2010
+set -g emojiRedQuestionmark "❓" # Unicode 6.0 in 2009
+set -g emojiWhiteCheckInGreenBox "✅" # Unicode 6.0 in 2010
+set -g emojiCheckboxWithCheck "☑️" # Unicode 1.1 in 1993
+set -g emojiSmallOrangeDiamond "🔸" # Unicode 6.0 in 2010
 # Sören adjusments
   set oparilames_omfEsPrefix1stLine "╭─ "
 #  set oparilames_omfEsPrefix2stLine "╰── ><(((\"> ──"
